@@ -24,5 +24,17 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
-  }
+    'vue/multi-word-component-names': 0,
+    'object-curly-spacing': 'off',
+    'handle-callback-err': 'off',
+    semi: 'off'
+  },
+  overrides: [
+    {
+      files: ['src/api/**/*.ts'],
+      rules: {
+        camelcase: 'off'
+      }
+    }
+  ]
 }

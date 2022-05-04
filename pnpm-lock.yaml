@@ -8,6 +8,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.21.0
   '@vitejs/plugin-vue': ^2.3.1
   '@vitejs/plugin-vue-jsx': ^1.3.10
+  async-validator: ^4.1.1
   axios: ^0.27.2
   element-plus: ^2.1.11
   eslint: ^8.0.1
@@ -44,6 +45,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.21.0_eslint@8.14.0+typescript@4.6.3
   '@vitejs/plugin-vue': 2.3.1_vite@2.9.6+vue@3.2.33
   '@vitejs/plugin-vue-jsx': 1.3.10
+  async-validator: 4.1.1
   eslint: 8.14.0
   eslint-config-standard: 17.0.0_14af0798efd537ecbc8732fe6f15829c
   eslint-plugin-import: 2.26.0_eslint@8.14.0
@@ -901,7 +903,6 @@ packages:
 
   /async-validator/4.1.1:
     resolution: {integrity: sha512-p4DO/JXwjs8klJyJL8Q2oM4ks5fUTze/h5k10oPPKMiLe1fj3G1QMzPHNmN1Py4ycOk7WlO2DcGXv1qiESJCZA==}
-    dev: false
 
   /asynckit/0.4.0:
     resolution: {integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=}

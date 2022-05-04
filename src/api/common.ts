@@ -1,8 +1,6 @@
 /* 公共基础接口 */
-import request, {get} from '@/util/request'
-import {ILoginInfo} from '@/api/types/common'
-
-console.log(request)
+import {get, post} from '@/util/request'
+import {ILoginFormData, ILoginInfo, ILoginResponse} from '@/api/types/common'
 
 export function getLoginInfo () {
   return get<ILoginInfo>('/login/info')
@@ -14,5 +12,13 @@ export function getCaptcha () {
       stamp: Date.now()
     },
     responseType: 'blob'
+  })
+}
+
+export function login (data:ILoginFormData) {
+  return post<ILoginResponse, ILoginFormData>('/login', data, {
+    /* headers: {
+      'content-type': 'application/json'
+    } */
   })
 }

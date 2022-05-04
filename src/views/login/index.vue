@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form @submit.prevent="onsubmit()" v-model="user" :rules="rules">
+    <el-form @submit.prevent="onsubmit()" :model="user" :rules="rules" ref="loginForm">
       <el-form-item prop="account">
         <el-input v-model="user.account" placeholder="input account">
           <template #prefix>
@@ -33,12 +33,17 @@
 </template>
 
 <script lang="ts" setup>
-import {getCaptcha, getLoginInfo} from '@/api/common'
-// import {useStore} from '@/store'
+import {getCaptcha, getLoginInfo, login} from '@/api/common'
+import {useStore} from '@/store'
 import {onMounted, reactive, ref} from 'vue'
 import type {ILoginInfo} from '@/api/types/common'
 import {Avatar, Key, Lock} from '@element-plus/icons-vue';
-// const store = useStore()
+import {ElMessage} from 'element-plus';
+import {useRouter} from 'vue-router';
+import {TElForm } from '@/types/element-plus';
+
+const router = useRouter()
+const store = useStore()
 const user = reactive({
   account: 'admin',
   pwd: '123456',
@@ -69,8 +74,29 @@ const rules = ref({
     }
   ]
 })
-const onsubmit = function () {
-
+const loginForm = ref<TElForm |null>(null)
+// 登录
+const onsubmit = async () => {
+  try {
+    await loginForm.value?.validate()
+  } catch (err:any) {
+    console.log(err)
+    ElMessage.error(err[Object.keys(err)[0]][0].message)
+    return false
+  }
+  loading.value = true
+  const [_err, loginResp] = await login(user)
+  if (!_err) {
+    console.log(loginResp)
+    store.commit('setUser', loginResp)
+    await router.replace({
+      name: 'home'
+    })
+  } else {
+    ElMessage.error(_err.message || _err)
+    loadCaptcha()
+  }
+  loading.value = false
 }
 const s = ref<ILoginInfo['slide']>([])
 

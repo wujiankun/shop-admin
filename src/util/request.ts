@@ -16,16 +16,16 @@ instance.interceptors.request.use((requestConfig) => {
 })
 
 instance.interceptors.response.use(response => {
-  if (response.status === 200) {
-    // console.log('response.headers')
-    if (response.headers['content-type'] && response.headers['content-type'].indexOf('image/png') >= 0) {
-      return response
-    }
+  // console.log('response.headers')
+  if (response.headers['content-type'] && response.headers['content-type'].indexOf('image/png') >= 0) {
     // content-type: "image/png; charset=utf-8"
-    if (response.data.data.status !== 200) {
-      return Promise.reject(new Error(response.data.data.status + ' : ' + response.data.data.msg))
-    }
+    return response
   }
+  if (response.data.status !== 200) {
+    // 登录接口非 200 时没有 data
+    return Promise.reject(new Error(response.data.status + ' : ' + response.data.msg))
+  }
+
   return response
 }, error => {
   // http 响应码 2xx 以外的走这个方法

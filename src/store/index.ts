@@ -1,18 +1,21 @@
 import {createStore, Store, useStore as baseUseStore} from 'vuex'
 import {InjectionKey} from 'vue'
 import {IUserInfo} from '@/api/types/common';
+import {getItem, setItem} from '@/util/storage';
+import {USER} from '@/util/constants';
 // 声明自己的 store state
 export interface State {
   count?:number,
   isCollapse?:boolean,
-  user:IUserInfo
+  user:IUserInfo&{token:string}|null
 }
 export const key:InjectionKey<Store<State>> = Symbol('state')
 const store = createStore<State>({
   state () {
     return {
       isCollapse: false,
-      user: JSON.parse(localStorage.getItem('user') || '') as IUserInfo
+      // user: JSON.parse(localStorage.getItem('user') || '') as IUserInfo
+      user: getItem<IUserInfo&{token:string}>(USER)
     }
   },
   getters: {},
@@ -22,7 +25,7 @@ const store = createStore<State>({
     },
     setUser (state, payload) {
       state.user = payload
-      localStorage.setItem('user', JSON.stringify(state.user))
+      setItem(USER, payload)
     }
   },
   actions: {},

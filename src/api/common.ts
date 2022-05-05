@@ -22,3 +22,6 @@ export function login (data:ILoginFormData) {
     } */
   })
 }
+export function logout () {
+  return get('/setting/admin/logout')
+}

@@ -39,10 +39,11 @@ import {onMounted, reactive, ref} from 'vue'
 import type {ILoginInfo} from '@/api/types/common'
 import {Avatar, Key, Lock} from '@element-plus/icons-vue';
 import {ElMessage} from 'element-plus';
-import {useRouter} from 'vue-router';
-import {TElForm } from '@/types/element-plus';
+import {useRouter, useRoute} from 'vue-router';
+import {TElForm, TFormRules} from '@/types/element-plus';
 
 const router = useRouter()
+const route = useRoute()
 const store = useStore()
 const user = reactive({
   account: 'admin',
@@ -51,7 +52,7 @@ const user = reactive({
 })
 const captcha = ref('https://shop.fed.lagounews.com/api/admin/captcha_pro')
 const loading = ref(false)
-const rules = ref({
+const rules = ref<TFormRules>({
   account: [
     {
       required: true,
@@ -88,12 +89,13 @@ const onsubmit = async () => {
   const [_err, loginResp] = await login(user)
   if (!_err) {
     console.log(loginResp)
-    store.commit('setUser', loginResp)
-    await router.replace({
-      name: 'home'
-    })
+    store.commit('setUser', {...loginResp.user_info, token: loginResp.token})
+    let redirect = route.query.redirect || '/'
+    if (typeof redirect !== 'string') {
+      redirect = '/'
+    }
+    await router.replace(redirect)
   } else {
-    ElMessage.error(_err.message || _err)
     loadCaptcha()
   }
   loading.value = false

@@ -3,6 +3,7 @@ import {createRouter, RouteRecordRaw, createWebHashHistory, RouterView} from 'vu
 import AppLayout from '../layout/AppLayout.vue'
 import nProgress from 'nprogress';
 import 'nprogress/nprogress.css'
+import store from '@/store';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -131,11 +132,20 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/login',
+    name: 'login',
+    meta: {
+      title: 'login',
+      noAuth: true
+    },
     component: () => import('../views/login/index.vue')
   },
   {
     path: '/:pathMatch(.*)*',
     name: '404',
+    meta: {
+      title: '404',
+      noAuth: true
+    },
     component: () => import('../views/404.vue')
   }
 ]
@@ -145,7 +155,16 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(() => {
+router.beforeEach((to) => {
+  console.log('beforeEach', to, store.state)
+  if (!to.meta.noAuth && !store.state.user) {
+    return {
+      path: '/login',
+      query: {
+        redirect: to.fullPath
+      }
+    }
+  }
   nProgress.start()
 })
 router.afterEach(() => {

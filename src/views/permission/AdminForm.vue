@@ -1,8 +1,9 @@
 <template>
-  <el-dialog
+  <DialogWrapper
       :title="props.adminId ? '编辑管理员' : '添加管理员'"
-      :before-close="handleDialogClosed"
-      destroy-on-close
+      @cancel="handleDialogClosed"
+      @confirm="handleSubmit"
+      @open="onDialogOpen"
   >
     <el-form
         ref="form"
@@ -58,20 +59,12 @@
         </el-radio-group>
       </el-form-item>
     </el-form>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="emit('cancel')">Cancel</el-button>
-        <el-button type="primary" @click="handleSubmit"
-        >Confirm</el-button
-        >
-      </span>
-    </template>
-  </el-dialog>
+  </DialogWrapper>
 </template>
 
 <script lang="ts" setup>
 import type {PropType} from 'vue'
-import {onMounted, ref} from 'vue'
+import {ref} from 'vue'
 import {createAdmin, getAdmin, getRoles, updateAdmin} from '@/api/admin'
 import type {TElForm, TFormRules} from '@/types/element-plus'
 import type {ISelectOptions} from '@/api/types/form'
@@ -81,10 +74,6 @@ const props = defineProps({
   adminId: { // 编辑的管理员 ID
     type: Number as PropType<number | null>,
     default: null
-  },
-  formVisible: { // 编辑的管理员 ID
-    type: Boolean,
-    default: false
   }
 })
 
@@ -126,12 +115,13 @@ const formRules: TFormRules = {
   ]
 }
 
-onMounted(() => {
+const onDialogOpen = () => {
+  console.log('AdminForm-onDialogOpen')
   formLoading.value = true
   Promise.all([loadRoles(), loadAdmin()]).finally(() => {
     formLoading.value = false
   })
-})
+}
 
 const loadRoles = async () => {
   roles.value = await getRoles()
@@ -148,11 +138,10 @@ const loadAdmin = async () => {
   }
 }
 
-const handleDialogClosed = (done:()=>void) => {
+const handleDialogClosed = () => {
   emit('update:admin-id', null)
   form.value?.clearValidate() // 清除验证结果
   form.value?.resetFields() // 清除表单数据
-  done()
 }
 
 const handleSubmit = async () => {

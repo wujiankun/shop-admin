@@ -8,7 +8,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.21.0
   '@vitejs/plugin-vue': ^2.3.1
   '@vitejs/plugin-vue-jsx': ^1.3.10
-  async-validator: ^4.1.1
+  '@vue/compiler-sfc': ^3.2.2
   axios: ^0.27.2
   element-plus: ^2.1.11
   eslint: ^8.0.1
@@ -44,7 +44,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.21.0_eslint@8.14.0+typescript@4.6.3
   '@vitejs/plugin-vue': 2.3.1_vite@2.9.6+vue@3.2.33
   '@vitejs/plugin-vue-jsx': 1.3.10
-  async-validator: 4.1.1
+  '@vue/compiler-sfc': 3.2.33
   eslint: 8.14.0
   eslint-config-standard: 17.0.0_14af0798efd537ecbc8732fe6f15829c
   eslint-plugin-import: 2.26.0_eslint@8.14.0
@@ -466,6 +466,10 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
     dev: true
+
+  /@sxzz/popperjs-es/2.11.7:
+    resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
+    dev: false
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
@@ -893,6 +897,7 @@ packages:
 
   /async-validator/4.1.1:
     resolution: {integrity: sha512-p4DO/JXwjs8klJyJL8Q2oM4ks5fUTze/h5k10oPPKMiLe1fj3G1QMzPHNmN1Py4ycOk7WlO2DcGXv1qiESJCZA==}
+    dev: false
 
   /asynckit/0.4.0:
     resolution: {integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=}
@@ -1140,7 +1145,7 @@ packages:
       '@ctrl/tinycolor': 3.4.1
       '@element-plus/icons-vue': 1.1.4_vue@3.2.33
       '@floating-ui/dom': 0.4.5
-      '@popperjs/core': registry.npmmirror.com/@sxzz/popperjs-es/2.11.7
+      '@popperjs/core': /@sxzz/popperjs-es/2.11.7
       '@types/lodash': 4.14.182
       '@types/lodash-es': 4.17.6
       '@vueuse/core': 8.3.1_vue@3.2.33
@@ -2550,12 +2555,6 @@ packages:
   /yallist/4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: true
-
-  registry.npmmirror.com/@sxzz/popperjs-es/2.11.7:
-    resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@sxzz/popperjs-es/-/popperjs-es-2.11.7.tgz}
-    name: '@sxzz/popperjs-es'
-    version: 2.11.7
-    dev: false
 
   registry.npmmirror.com/esbuild-android-64/0.14.38:
     resolution: {integrity: sha512-aRFxR3scRKkbmNuGAK+Gee3+yFxkTJO/cx83Dkyzo4CnQl/2zVSurtG6+G86EQIZ+w+VYngVyK7P3HyTBKu3nw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/esbuild-android-64/-/esbuild-android-64-0.14.38.tgz}

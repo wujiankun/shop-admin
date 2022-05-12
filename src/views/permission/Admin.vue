@@ -94,7 +94,7 @@
       />
     </el-card>
   </page-container>
-  <admin-form
+  <AdminForm
       v-model="formVisible"
       v-model:admin-id="adminId"
       @success="handleFormSuccess"

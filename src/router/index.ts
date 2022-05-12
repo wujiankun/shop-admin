@@ -21,33 +21,42 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'media',
         name: 'media',
-        component: () => import('@/views/Media.vue'),
+        component: RouterView,
         meta: {
           title: '媒体'
-        }
+        },
+        children: [
+          {
+            path: 'article',
+            name: 'article-list',
+            component: () => import('@/views/media/Article.vue'),
+            meta: {
+              title: '文章列表'
+            }
+          }, {
+            path: 'article-add',
+            name: 'article-add',
+            component: () => import('@/views/media/ArticleAdd.vue'),
+            meta: {
+              title: '文章添加'
+            }
+          }
+        ]
       },
       {
-        path: '/order',
-        name: 'order',
+        path: '/maintain',
+        name: 'maintain',
         component: RouterView,
         meta: {
           title: '订单'
         },
         children: [
           {
-            path: 'list',
-            name: 'order-list',
-            component: () => import('@/views/order/List.vue'),
+            path: 'attachment',
+            name: 'attachment',
+            component: () => import('@/views/maintain/Attachment.vue'),
             meta: {
               title: '订单列表'
-            }
-          },
-          {
-            path: 'offline',
-            name: 'order-offline',
-            component: () => import('@/views/order/Offline.vue'),
-            meta: {
-              title: '离线订单'
             }
           }
         ]
@@ -100,6 +109,14 @@ const routes: RouteRecordRaw[] = [
             component: () => import('@/views/product/List.vue'),
             meta: {
               title: '列表'
+            }
+          },
+          {
+            path: 'add_product',
+            name: 'add_product',
+            component: () => import('@/views/product/add/index.vue'),
+            meta: {
+              title: '添加商品'
             }
           },
           {

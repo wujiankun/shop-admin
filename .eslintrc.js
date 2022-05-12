@@ -27,7 +27,10 @@ module.exports = {
     'vue/multi-word-component-names': 0,
     'object-curly-spacing': 'off',
     'handle-callback-err': 'off',
-    semi: 'off'
+    semi: 'off',
+    indent: 'off',
+    'space-before-function-paren': 'off',
+    'vue/no-mutating-props': 'off'
   },
   overrides: [
     {
